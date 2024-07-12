@@ -1,11 +1,24 @@
-export class Product{
+export class Livro{
     id: number;
-    name: string;
-    price: number;
+    title: string;
+    author: string;
+    publishedDate: string;
+    isbn: string;
+    pages: number;
+    language: string;
+    publisher: string;
 
-    constructor(id?:number, name?:string, price?:number){
-        this.id = id || 0;
-        this.name = name || '';
-        this.price = price || 0;
+    constructor(id:number, title:string, author:string, publishedDate: string,isbn: string,pages: number, language: string, publisher: string){
+        this.id = this.criarId();
+        this.title = title;
+        this.author = author;
+        this.publishedDate = publishedDate;
+        this.isbn = isbn;
+        this.pages = pages;
+        this.language = language;
+        this.publisher = publisher;
+    }
+    criarId():number{
+        return Date.now();
     }
 }
