@@ -1,17 +1,11 @@
-export class Product{
-    id:number;
-    name:string;
-    description:string;
-    price:number;
+export class Pao{
+    private id: number;
+    private nome: string;
+    private vegano: boolean;
+}
 
-    constructor(name:string, description:string, price:number){
-        this.name = name;
-        this.description = description;
-        this.price = price;
-        this.id = this.geraId();
-    }
-
-    private geraId():number{
-        return Date.now();
-    }
+constructor (id: number, nome: string, vegano:boolean){
+    this.id = id;
+    this.nome = nome;
+    this.vegano = vegano;
 }
