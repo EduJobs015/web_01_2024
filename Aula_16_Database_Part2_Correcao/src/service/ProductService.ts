@@ -1,12 +1,11 @@
 import { Livro } from "../model/Livro";
-import { Product } from "../model/Product";
 import { ProductRepository } from "../repository/ProductRepository";
 
 export class ProductService{
 
     productRepository: ProductRepository = new ProductRepository();
 
-    async cadastrarProduto(produtoData: any): Promise<Product> {
+    async cadastrarProduto(produtoData: any): Promise<Livro> {
         const { id,title, author, publishedDate, isbn, pages, language, publisher} = Livro;
         if(id || title || author || publishedDate || isbn || pages || language || publisher){
             throw new Error("Informações incompletas");
