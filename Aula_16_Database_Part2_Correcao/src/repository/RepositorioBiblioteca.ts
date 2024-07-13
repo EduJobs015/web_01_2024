@@ -1,7 +1,7 @@
 import { executarComandoSQL } from "../database/mysql";
 import { Livro } from "../model/Livro";
 
-export class LivroRepository{
+export class RepositorioBiblioteca{
 
     constructor(){
         this.createTable();
@@ -44,6 +44,22 @@ export class LivroRepository{
         }
     }
 
+    async BuscarTodos() :Promise<Livro>{
+        const query = "SELECT * FROM vBiblioteca.Livro " ;
+
+        try {
+            const resultado = await executarComandoSQL(query, []);
+            return new Promise<Livro>((resolve)=>{
+                resolve(resultado);
+            })
+        } catch (err:any) {
+            console.error(`Falha ao procurar os livros gerando o erro: ${err}`);
+            throw err;
+        }
+    }
+
+
+
     async updateLivro(id:number, title: string, author: string, publishedDate: string, isbn:string, pages: number, language: string, publisher: string) :Promise<Livro>{
         const query = "UPDATE Biblioteca.Livro set title = ?, author ?, publishedDate ?, isbn ?, pages ?, language ?, publisher ?  where id = ?;" ;
 
@@ -55,52 +71,37 @@ export class LivroRepository{
                 resolve(LivroId);
             })
         } catch (err:any) {
-            console.error(`Erro ao atualizar o produto de ID ${id} gerando o erro: ${err}`);
+            console.error(`Erro ao atualizar o livro de ID ${id} gerando o erro: ${err}`);
             throw err;
         }
     }
 
-    async deleteProduct(id: number, name:string, price:number) :Promise<Product>{
-        const query = "DELETE FROM vendas.product where id = ?;" ;
+    async BuscarPorId(id: number) :Promise<Livro>{
+        const query = "SELECT * FROM Biblioteca.Livro where id = ?;" ;
+
+        try {
+            const resultado = await executarComandoSQL(query, [id]);
+            console.log('Produto encontrado com sucesso, ID: ', resultado);
+            return new Promise<Livro>((resolve)=>{
+                resolve(resultado);
+            })
+        } catch (err:any) {
+            console.error(`Falha ao encontrar o produto de ID ${id} gerando o erro: ${err}`);
+            throw err;
+        }
+    }
+
+    async DeletarLivro(id: number) :Promise<Livro>{
+        const query = "SELECT * FROM Biblioteca.Livro where id = ?" ;
 
         try {
             const resultado = await executarComandoSQL(query, [id]);
             console.log('Produto deletado com sucesso, ID: ', resultado);
-            const product = new Product(id, name, price);
-            return new Promise<Product>((resolve)=>{
-                resolve(product);
-            })
-        } catch (err:any) {
-            console.error(`Falha ao deletar o produto de ID ${id} gerando o erro: ${err}`);
-            throw err;
-        }
-    }
-
-    async filterProduct(id: number) :Promise<Product>{
-        const query = "SELECT * FROM vendas.product where id = ?" ;
-
-        try {
-            const resultado = await executarComandoSQL(query, [id]);
-            console.log('Produto localizado com sucesso, ID: ', resultado);
-            return new Promise<Product>((resolve)=>{
+            return new Promise<Livro>((resolve)=>{
                 resolve(resultado);
             })
         } catch (err:any) {
             console.error(`Falha ao procurar o produto de ID ${id} gerando o erro: ${err}`);
-            throw err;
-        }
-    }
-
-    async filterAllProduct() :Promise<Product[]>{
-        const query = "SELECT * FROM vendas.product" ;
-
-        try {
-            const resultado = await executarComandoSQL(query, []);
-            return new Promise<Product[]>((resolve)=>{
-                resolve(resultado);
-            })
-        } catch (err:any) {
-            console.error(`Falha ao listar os produtos gerando o erro: ${err}`);
             throw err;
         }
     }

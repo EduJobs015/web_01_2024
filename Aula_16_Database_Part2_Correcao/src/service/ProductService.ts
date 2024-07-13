@@ -1,3 +1,4 @@
+import { Livro } from "../model/Livro";
 import { Product } from "../model/Product";
 import { ProductRepository } from "../repository/ProductRepository";
 
@@ -6,12 +7,12 @@ export class ProductService{
     productRepository: ProductRepository = new ProductRepository();
 
     async cadastrarProduto(produtoData: any): Promise<Product> {
-        const { name, price } = produtoData;
-        if(!name || !price ){
+        const { id,title, author, publishedDate, isbn, pages, language, publisher} = Livro;
+        if(id || title || author || publishedDate || isbn || pages || language || publisher){
             throw new Error("Informações incompletas");
         }
 
-        const novoProduto =  await this.productRepository.insertProduct(name, price);
+        const novoProduto =  await this..insertProduct(name, price);
         console.log("Service - Insert ", novoProduto);
         return novoProduto;
     }
