@@ -33,7 +33,7 @@ export class ServiceBiblioteca{
         return produto;
     }
 
-    async filtrarProduto(produtoData: any): Promise<Product> {
+    async filtrarProduto(produtoData: any): Promise<Livro> {
         if(!produtoData ){
             throw new Error("Informações incompletas");
         }

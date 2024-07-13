@@ -8,7 +8,7 @@ const PORT = 3000;
 app.use(express.json());
 
 app.post("/api/product", CriarLivro)
-app.put("/api/product", atualizarProduto)
+app.get("/api/product", BuscarTodos)
 app.delete("/api/product", deletarProduto)
 app.get("/api/product", filtrarProduto)
 app.get("/api/products", listarTodosProduto)

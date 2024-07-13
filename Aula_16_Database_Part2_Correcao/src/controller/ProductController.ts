@@ -18,13 +18,13 @@ export async function CriarLivro (req: Request, res: Response){
     }
 };
 
-export async function atualizarProduto (req: Request, res: Response){
+export async function BuscarTodos (req: Request, res: Response){
     try {
-        const produto = await productService.atualizarProduto(req.body);
+        const livro = await livroService.BuscarTodos();
         res.status(200).json(
             {
-                mensagem:"Produto atualizado com sucesso!",
-                produto:produto
+                mensagem:"Todos os livros em sua biblioteca!",
+                produto:livro
             }
         );
     } catch (error: any) {
