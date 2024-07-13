@@ -9,7 +9,7 @@ export class Livro{
     publisher: string;
 
     constructor(id:number, title:string, author:string, publishedDate: string,isbn: string,pages: number, language: string, publisher: string){
-        this.id = this.criarId();
+        this.id = id;
         this.title = title;
         this.author = author;
         this.publishedDate = publishedDate;
@@ -18,7 +18,5 @@ export class Livro{
         this.language = language;
         this.publisher = publisher;
     }
-    criarId():number{
-        return Date.now();
-    }
+
 }
