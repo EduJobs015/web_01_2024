@@ -58,7 +58,20 @@ export class RepositorioBiblioteca{
         }
     }
 
+    async BuscarPorId(id: number) :Promise<Livro>{
+        const query = "SELECT * FROM Biblioteca.Livro where id = ?;" ;
 
+        try {
+            const resultado = await executarComandoSQL(query, [id]);
+            console.log('Produto encontrado com sucesso, ID: ', resultado);
+            return new Promise<Livro>((resolve)=>{
+                resolve(resultado);
+            })
+        } catch (err:any) {
+            console.error(`Falha ao encontrar o produto de ID ${id} gerando o erro: ${err}`);
+            throw err;
+        }
+    }
 
     async updateLivro(id:number, title: string, author: string, publishedDate: string, isbn:string, pages: number, language: string, publisher: string) :Promise<Livro>{
         const query = "UPDATE Biblioteca.Livro set title = ?, author ?, publishedDate ?, isbn ?, pages ?, language ?, publisher ?  where id = ?;" ;
@@ -76,20 +89,6 @@ export class RepositorioBiblioteca{
         }
     }
 
-    async BuscarPorId(id: number) :Promise<Livro>{
-        const query = "SELECT * FROM Biblioteca.Livro where id = ?;" ;
-
-        try {
-            const resultado = await executarComandoSQL(query, [id]);
-            console.log('Produto encontrado com sucesso, ID: ', resultado);
-            return new Promise<Livro>((resolve)=>{
-                resolve(resultado);
-            })
-        } catch (err:any) {
-            console.error(`Falha ao encontrar o produto de ID ${id} gerando o erro: ${err}`);
-            throw err;
-        }
-    }
 
     async DeletarLivro(id: number) :Promise<Livro>{
         const query = "SELECT * FROM Biblioteca.Livro where id = ?" ;

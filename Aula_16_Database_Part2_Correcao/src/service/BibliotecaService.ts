@@ -16,38 +16,42 @@ export class ServiceBiblioteca{
         return novoProduto;
     }
 
-    async updateLivro(Livro: any): Promise<Livro> {
+    async Serv_updateLivro(Livro: any): Promise<Livro> {
         const { id, title, author, publishedDate, isbn, pages, language, publisher } = Livro;
         if(!id || !title || !author || !publishedDate || !isbn || !pages || !language || !publisher){
             throw new Error("Informações incompletas");
         }
 
-        const produto =  await this.repositorioLivro.updateLivro(id, title, author, publishedDate, isbn, pages, language, publisher);
-        console.log("Service - Update ", produto);
-        return produto;
+        const novoLivro =  await this.repositorioLivro.updateLivro(id, title, author, publishedDate, isbn, pages, language, publisher);
+        console.log("Service - Update ", novoLivro);
+        return novoLivro;
     }
 
-    async BuscarTodos(): Promise<Livro> {
+    async Serv_BuscarTodos(): Promise<Livro> {
         const produto =  await this.repositorioLivro.BuscarTodos();
         console.log("Service - Livros Encontrados : ", produto);
         return produto;
     }
 
-    async filtrarProduto(produtoData: any): Promise<Livro> {
-        if(!produtoData ){
+    async Serv_filtrarLivro(ID: any): Promise<Livro> {
+        if(!ID ){
             throw new Error("Informações incompletas");
         }
-        const id = parseInt(produtoData, 10);
+        const id = parseInt(ID, 10);
 
-        const produto =  await this.productRepository.filterProduct(id);
-        console.log("Service - Filtrar", produto);
-        return produto;
+        const Livro =  await this.repositorioLivro.BuscarPorId(id);
+        console.log("Service - Filtrar", Livro);
+        return Livro;
     }
 
-    async listarTodosProdutos(): Promise<Product[]> {
-        const produto =  await this.productRepository.filterAllProduct();
-        console.log("Service - Filtrar Todos", produto);
-        return produto;
+    async Ser_DeletarLivro(Livro: any): Promise<Livro[]> {
+        const { id, title, author, publishedDate, isbn, pages, language, publisher } = Livro;
+        if(!id || !title || !author || !publishedDate || !isbn || !pages || !language || !publisher){
+            throw new Error("Informações incompletas");
+        }
+        const idDeletar = parseInt(id)
+        const DeletarLivro = await this.repositorioLivro.DeletarLivro(idDeletar)
+        return id;
     }
 
 }
