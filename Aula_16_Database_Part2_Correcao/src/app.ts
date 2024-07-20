@@ -1,5 +1,5 @@
 import express from 'express';
-import { CriarLivro, BuscarTodos, updateLivro, BuscarPorId, DeletarLivro} from './controller/ProductController';
+import { C_CriarLivro, C_BuscarTodos, C_DeletarLivro, C_BuscarPorId } from './controller/BibliotecaController';
 
 const app = express();
 
@@ -7,10 +7,10 @@ const PORT = 3000;
 
 app.use(express.json());
 
-app.post("/api/product", CriarLivro)
-app.get("/api/product", BuscarTodos)
-app.delete("/api/product", deletarProduto)
-app.get("/api/product", filtrarProduto)
-app.get("/api/products", listarTodosProduto)
+app.post("/api/product", C_CriarLivro)
+app.get("/api/product", C_BuscarTodos)
+app.delete("/api/product", C_DeletarLivro)
+app.get("/api/product", C_BuscarPorId)
+app.get("/api/products", C_BuscarTodos)
 
 app.listen(PORT, ()=> console.log("API online na porta: " + PORT));

@@ -4,7 +4,7 @@ import { ServiceBiblioteca } from "../service/BibliotecaService";
 
 const livroService = new ServiceBiblioteca();
 
-export async function CriarLivro (req: Request, res: Response){
+export async function C_CriarLivro (req: Request, res: Response){
     try {
         const novoLivro = await livroService.Serv_CriarLivro(req.body);
         res.status(201).json(
@@ -18,7 +18,7 @@ export async function CriarLivro (req: Request, res: Response){
     }
 };
 
-export async function BuscarTodos (req: Request, res: Response){
+export async function C_BuscarTodos (req: Request, res: Response){
     try {
         const livro = await livroService.Serv_BuscarTodos();
         res.status(200).json(
@@ -32,7 +32,7 @@ export async function BuscarTodos (req: Request, res: Response){
     }
 };
 
-export async function BuscarPorId (req: Request, res: Response){
+export async function C_BuscarPorId (req: Request, res: Response){
     try {
         const Livro = await livroService.Serv_filtrarLivro(req.query.id);
         res.status(200).json(
@@ -46,7 +46,7 @@ export async function BuscarPorId (req: Request, res: Response){
     }
 };
 
-export async function updateLivro (req: Request, res: Response){
+export async function C_updateLivro (req: Request, res: Response){
     try {
         const livro = await livroService.Serv_updateLivro(req.body);
         res.status(200).json(
@@ -60,7 +60,7 @@ export async function updateLivro (req: Request, res: Response){
     }
 };
 
-export async function DeletarLivro (req: Request, res: Response){
+export async function C_DeletarLivro (req: Request, res: Response){
     try {
         const livroDeletado = await livroService.Ser_DeletarLivro(req.body);
         res.status(200).json(
