@@ -45,7 +45,7 @@ export class RepositorioBiblioteca{
     }
 
     async BuscarTodos() :Promise<Livro>{
-        const query = "SELECT * FROM vBiblioteca.Livro " ;
+        const query = "SELECT * FROM Biblioteca.Livro " ;
 
         try {
             const resultado = await executarComandoSQL(query, []);

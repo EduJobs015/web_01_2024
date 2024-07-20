@@ -5,7 +5,7 @@ export class ServiceBiblioteca{
 
     repositorioLivro: RepositorioBiblioteca = new RepositorioBiblioteca();
 
-    async Serv_CriarLivro(livro: any): Promise<Livro> {
+    async Serv_CriarLivro(Livro: any): Promise<Livro> {
         const {id, title, author, publishedDate, isbn, pages, language, publisher} = Livro;
         if(!id || !title || !author || !publishedDate || !isbn || !pages || !language || !publisher){
             throw new Error("Informações incompletas");

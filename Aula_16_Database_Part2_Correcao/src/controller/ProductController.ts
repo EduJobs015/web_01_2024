@@ -20,7 +20,7 @@ export async function CriarLivro (req: Request, res: Response){
 
 export async function BuscarTodos (req: Request, res: Response){
     try {
-        const livro = await livroService.BuscarTodos();
+        const livro = await livroService.Serv_BuscarTodos();
         res.status(200).json(
             {
                 mensagem:"Todos os livros em sua biblioteca!",
@@ -32,13 +32,13 @@ export async function BuscarTodos (req: Request, res: Response){
     }
 };
 
-export async function deletarProduto (req: Request, res: Response){
+export async function BuscarPorId (req: Request, res: Response){
     try {
-        const produto = await productService.deletarProduto(req.body);
+        const Livro = await livroService.Serv_filtrarLivro(req.query.id);
         res.status(200).json(
             {
-                mensagem:"Produto deletado com sucesso!",
-                produto:produto
+                mensagem:"Livro encontrado com sucesso!",
+                produto:Livro
             }
         );
     } catch (error: any) {
@@ -46,13 +46,13 @@ export async function deletarProduto (req: Request, res: Response){
     }
 };
 
-export async function filtrarProduto (req: Request, res: Response){
+export async function updateLivro (req: Request, res: Response){
     try {
-        const produto = await productService.filtrarProduto(req.query.id);
+        const livro = await livroService.Serv_updateLivro(req.body);
         res.status(200).json(
             {
-                mensagem:"Produto encontrado com sucesso!",
-                produto:produto
+                mensagem:"Dados atualizados com sucesso!",
+                produto:livro
             }
         );
     } catch (error: any) {
@@ -60,13 +60,13 @@ export async function filtrarProduto (req: Request, res: Response){
     }
 };
 
-export async function listarTodosProduto (req: Request, res: Response){
+export async function DeletarLivro (req: Request, res: Response){
     try {
-        const produtos = await productService.listarTodosProdutos();
+        const livroDeletado = await livroService.Ser_DeletarLivro(req.body);
         res.status(200).json(
             {
-                mensagem:"Produtos listados com sucesso!",
-                produtos:produtos
+                mensagem:"Livro deletado com sucesso!!",
+                produtos:livroDeletado
             }
             );
     } catch (error: any) {
