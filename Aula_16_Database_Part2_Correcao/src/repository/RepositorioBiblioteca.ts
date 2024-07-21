@@ -105,5 +105,20 @@ export class RepositorioBiblioteca{
         }
     }
 
+    async buscarIsbn(isbn: number) :Promise<Livro>{
+        const query = "SELECT * FROM Biblioteca.Livro where isbn = ?" ;
+
+        try {
+            const resultado = await executarComandoSQL(query, [isbn]);
+            console.log('Produto deletado com sucesso, isbn: ', resultado);
+            return new Promise<Livro>((resolve)=>{
+                resolve(resultado);
+            })
+        } catch (err:any) {
+            console.error(`Falha ao procurar o produto de ID ${isbn} gerando o erro: ${err}`);
+            throw err;
+        }
+    }
+
     
 }

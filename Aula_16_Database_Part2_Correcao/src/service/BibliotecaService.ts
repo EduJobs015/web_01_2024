@@ -10,10 +10,13 @@ export class ServiceBiblioteca{
         if(!id || !title || !author || !publishedDate || !isbn || !pages || !language || !publisher){
             throw new Error("Informações incompletas");
         }
-
-        const novoProduto =  await this.repositorioLivro.CriarLivro(id, title, author, publishedDate, isbn, pages, language, publisher);
-        console.log("Service - Insert ", novoProduto);
-        return novoProduto;
+        const isbnExistente = this.repositorioLivro.buscarIsbn(isbn);
+        if(isbnExistente === isbn){
+            throw new Error("O isbn já esta em uso !!")
+        }
+        const novoLivro =  await this.repositorioLivro.CriarLivro(id, title, author, publishedDate, isbn, pages, language, publisher);
+        console.log("Service - Insert ", novoLivro);
+        return novoLivro;
     }
 
     async Serv_updateLivro(Livro: any): Promise<Livro> {
@@ -38,6 +41,9 @@ export class ServiceBiblioteca{
             throw new Error("Informações incompletas");
         }
         const id = parseInt(ID, 10);
+        if(!id){
+            throw new Error("O id fornecido não foi encontrado !!")
+        }
 
         const Livro =  await this.repositorioLivro.BuscarPorId(id);
         console.log("Service - Filtrar", Livro);
