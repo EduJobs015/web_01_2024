@@ -18,5 +18,4 @@ export class Livro{
         this.language = language;
         this.publisher = publisher;
     }
-
 }
