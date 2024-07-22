@@ -8,8 +8,8 @@ const PORT = 3000;
 app.use(express.json());
 
 app.post("/api/livro", C_CriarLivro);
-app.get("/api/livro/:id", C_BuscarPorId);
 app.get("/api/livro/todos", C_BuscarTodos);
+app.get("/api/livro/:id", C_BuscarPorId);
 app.put("/api/livro/up", C_updateLivro);  
 app.delete("/api/livro/:id", C_DeletarLivro);
 

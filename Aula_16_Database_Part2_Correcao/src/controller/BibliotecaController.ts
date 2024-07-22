@@ -34,10 +34,10 @@ export async function C_BuscarTodos (req: Request, res: Response){
 
 export async function C_BuscarPorId (req: Request, res: Response){
     try {
-        const Livro = await livroService.Serv_filtrarLivro(req.query.id);
+        const Livro = await livroService.Serv_filtrarLivro(req.params.id);
         res.status(200).json(
             {
-                mensagem:"Livro encontrado com sucesso!",
+                mensagem:"Livro não encontrado !!",
                 produto:Livro
             }
         );

@@ -11,7 +11,7 @@ export class ServiceBiblioteca{
             throw new Error("Informações incompletas");
         }
         const isbnExistente = this.repositorioLivro.buscarIsbn(isbn);
-        if(isbnExistente === isbn){
+        if(isbnExistente != null){
             throw new Error("O isbn já esta em uso !!")
         }
         const novoLivro =  await this.repositorioLivro.CriarLivro(title, author, publishedDate, isbn, pages, language, publisher);
@@ -32,20 +32,18 @@ export class ServiceBiblioteca{
 
     async Serv_BuscarTodos(): Promise<Livro[]> { 
         const produto = await this.repositorioLivro.BuscarTodos();
-        console.log("Service - Livros Encontrados : ", produto);
         return produto;
     }
     
     async Serv_filtrarLivro(ID: any): Promise<Livro> {
-        if(!ID ){
-            throw new Error("Informações incompletas");
-        }
         const id = parseInt(ID, 10);
         if(!id){
             throw new Error("O id fornecido não foi encontrado !!")
         }
 
         const Livro =  await this.repositorioLivro.BuscarPorId(id);
+        if(!Livro)
+            throw new Error("Livro não encontrado");
         console.log("Service - Filtrar", Livro);
         return Livro;
     }
