@@ -13,6 +13,7 @@ export class RepositorioBiblioteca {
                 id INT AUTO_INCREMENT PRIMARY KEY,
                 title VARCHAR(255) NOT NULL,
                 author VARCHAR(255) NOT NULL,
+                publishedDate DATE NOT NULL,
                 isbn VARCHAR(20) NOT NULL,
                 pages INT NOT NULL,
                 language VARCHAR(100) NOT NULL,
@@ -103,18 +104,21 @@ export class RepositorioBiblioteca {
         }
     }
 
-    async buscarIsbn(isbn: string): Promise<Livro> {
+    async buscarIsbn(isbn: string): Promise<Livro | null> {
         const query = "SELECT * FROM livros WHERE isbn = ?;";
-
+    
         try {
             const resultado = await executarComandoSQL(query, [isbn]);
             console.log('Livro encontrado com sucesso, ISBN: ', resultado);
-            return new Promise<Livro>((resolve) => {
-                resolve(resultado[0]);
-            });
+            if (resultado.length > 0) {
+                return resultado[0];
+            } else {
+                return null;
+            }
         } catch (err: any) {
-            console.error(`Falha ao procurar o livro de ISBN ${isbn} gerando o erro: ${err}`);
+            console.error(`Falha ao procurar o livro de ISBN ${isbn}, erro: ${err}`);
             throw err;
         }
     }
+    
 }
